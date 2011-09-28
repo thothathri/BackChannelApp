@@ -1,0 +1,25 @@
+<h1>Listing comments_votes</h1>
+
+<table>
+  <tr>
+    <th>Post</th>
+    <th>Comment</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @comments_votes.each do |comments_vote| %>
+  <tr>
+    <td><%= comments_vote.post %></td>
+    <td><%= comments_vote.comment %></td>
+    <td><%= link_to 'Show', comments_vote %></td>
+    <td><%= link_to 'Edit', edit_comments_vote_path(comments_vote) %></td>
+    <td><%= link_to 'Destroy', comments_vote, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Comments vote', new_comments_vote_path %>
