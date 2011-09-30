@@ -3,4 +3,13 @@ Username:  <%= @user.username %>
 <br />
 Name:  <%= @user.name %>
 <br />
+<h2>Posts By User</h2>
+<% @user_posts.each do |post| %>
+    <%= post.topic %>
+    <%= link_to 'Show', post %>
+    <% if post.user_id == session[:current_user_id] %>
+    <td><%= link_to 'Edit', edit_post_path(post) %>
+    <td><%= link_to 'Delete', post, confirm: 'Are you sure?', method: :delete %>
+    <% end %><br />
+<% end %>
 

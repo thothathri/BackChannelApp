@@ -70,6 +70,7 @@ def login
     if @user == nil
        redirect_to(:controller => 'main',:action => 'index', notice: 'No such user exists' )
     end
+    @user_posts = Post.find_all_by_user_id(@user.id)
     respond_to do |format|
       format.html # search.html.erb
     end

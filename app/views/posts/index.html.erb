@@ -16,7 +16,13 @@
     <td><%= link_to 'Show', post %></td>
     <td><%= link_to 'Edit', edit_post_path(post) %></td>
     <td><%= link_to 'Destroy', post, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'Comment', new_comment_path(:post_id => post.id) %></td>
   </tr>
+  <tr>
+    <% Comment.find_all_by_post_id(post.id).each do |cmt| %>
+    <td></td><td><%= cmt.reply %>    </td>
+  </tr>
+    <% end %>
 <% end %>
 </table>
 
