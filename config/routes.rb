@@ -7,6 +7,8 @@ BackChannelApp5::Application.routes.draw do
 
   match 'users/login'=> 'users#login'
 
+  match 'users/search'=> 'users#search'
+
   resources :comments_votes
 
   resources :posts_votes

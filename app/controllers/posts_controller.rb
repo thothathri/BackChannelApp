@@ -40,12 +40,13 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    @post = Post.new(:topic => params[:topic])
-    @post.id = session[:current_user]
+    @post = Post.new
+    @post.topic = params[:post][:topic]
+    @post.user_id = session[:current_user_id]
 
     respond_to do |format|
       if @post.save
-        format.html { redirect_to @post, notice: 'Post was successfully created.' }
+        format.html { redirect_to @post, notice: @post.user_id }
         format.json { render json: @post, status: :created, location: @post }
       else
         format.html { render action: "new" }

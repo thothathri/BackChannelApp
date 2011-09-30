@@ -7,7 +7,7 @@
 
 <p>
   <b>User:</b>
-  <%= @post.user %>
+  <%= User.find(@post.user).username %>
 </p>
 
 

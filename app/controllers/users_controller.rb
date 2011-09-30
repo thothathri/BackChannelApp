@@ -16,10 +16,10 @@ def login
        redirect_to(:controller => 'main',:action => 'index') and return
     end
     if(@user.password!=params[:password])
-      redirect_to(:controller => 'main',:action => 'index') and return
+      redirect_to(:controller => 'main',:action => 'index', notice: 'Wrong User Name!') and return
     end
     session[:current_user_id] = @user.id
-    redirect_to(:controller => 'posts',:action => 'index') and return
+    redirect_to(:controller => 'posts',:action => 'index', :notice => session[:current_user_id] ) and return
   end
 
   # GET /users/1
@@ -65,6 +65,19 @@ def login
     end
   end
 
+  def search
+    @user = User.find_by_username(params[:search_by_user_query])
+    if @user == nil
+       redirect_to(:controller => 'main',:action => 'index', notice: 'No such user exists' )
+    end
+    respond_to do |format|
+      format.html # search.html.erb
+    end
+  end
+
+  def find_posts
+
+  end
   # PUT /users/1
   # PUT /users/1.json
   def update
