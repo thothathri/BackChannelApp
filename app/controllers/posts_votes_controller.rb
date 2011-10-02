@@ -25,10 +25,25 @@ class PostsVotesController < ApplicationController
   # GET /posts_votes/new.json
   def new
     @posts_vote = PostsVote.new
+    @posts_vote.post_id = params[:post_id]
+    @posts_vote.user_id = session[:current_user_id]
+    if Post.find(params[:post_id]).user_id == session[:current_user_id]
+      flash[:notice] = "The user cannot vote his own posts/replies"
+      redirect_to :controller => 'posts', :action => 'index' and return
+    else
+      if PostsVote.find_by_post_id_and_user_id(params[:post_id], session[:current_user_id])
+        flash[:notice] = "You have already voted"
+        redirect_to :controller => 'posts', :action => 'index' and return
+      else
 
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @posts_vote }
+        if @posts_vote.save
+          redirect_to :controller => 'posts', :action => 'index'  and return
+        else
+         flash[:notice] = "Error!"
+             redirect_to :controller => 'posts', :action => 'index' and return
+        end
+        redirect_to :controller => 'posts', :action => 'index'  and return
+      end
     end
   end
 
@@ -40,18 +55,9 @@ class PostsVotesController < ApplicationController
   # POST /posts_votes
   # POST /posts_votes.json
   def create
-    @posts_vote = PostsVote.new(params[:posts_vote])
 
-    respond_to do |format|
-      if @posts_vote.save
-        format.html { redirect_to @posts_vote, notice: 'Posts vote was successfully created.' }
-        format.json { render json: @posts_vote, status: :created, location: @posts_vote }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @posts_vote.errors, status: :unprocessable_entity }
-      end
-    end
   end
+
 
   # PUT /posts_votes/1
   # PUT /posts_votes/1.json

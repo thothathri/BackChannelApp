@@ -10,6 +10,7 @@
   <%= User.find(@post.user).username %>
 </p>
 
-
-<%= link_to 'Edit', edit_post_path(@post) %> |
+<% if @post.user_id == session[:current_user_id] %>
+<%= link_to 'Edit', edit_post_path(@post) %>
+<% end %>
 <%= link_to 'Back', posts_path %>

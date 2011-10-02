@@ -1,4 +1,4 @@
-<h1>Listing posts</h1>
+<h1>List of Posts</h1>
 
 <table>
   <tr>
@@ -12,15 +12,22 @@
 <% @posts.each do |post| %>
   <tr>
     <td><%= post.topic %></td>
-    <td><%= User.find_by_id(post.user_id).username %></td>
+    <td><b><%= User.find_by_id(post.user_id).username %></b></td>
     <td><%= link_to 'Show', post %></td>
+    <td><b><%= PostsVote.find_all_by_post_id(post.id).length %>Votes</b></td>
+    <% if post.user_id == session[:current_user_id] %>
     <td><%= link_to 'Edit', edit_post_path(post) %></td>
-    <td><%= link_to 'Destroy', post, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'Delete', post, confirm: 'Are you sure?', method: :delete %></td>
+    <% end %>
     <td><%= link_to 'Comment', new_comment_path(:post_id => post.id) %></td>
+    <td><%= link_to 'Vote Up', new_posts_vote_path(:post_id => post.id) %></td>
   </tr>
   <tr>
     <% Comment.find_all_by_post_id(post.id).each do |cmt| %>
     <td></td><td><%= cmt.reply %>    </td>
+    <td><b><%= User.find(cmt.user_id).username %></b></td>
+    <td><b><%= CommentsVote.find_all_by_comment_id(cmt.id).length %>Votes</b></td>
+    <td><%= link_to 'Vote Up', new_comments_vote_path(:user_id => cmt.user_id, :comment_id => cmt.id) %></td>
   </tr>
     <% end %>
 <% end %>

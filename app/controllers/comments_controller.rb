@@ -44,16 +44,12 @@ class CommentsController < ApplicationController
     @comment.reply = params[:comment][:reply]
     @comment.post_id = params[:comment][:post_id]
     @comment.user_id = session[:current_user_id]
-
-    respond_to do |format|
       if @comment.save
-        format.html { redirect_to @comment, notice: 'Comment was successfully created.' }
-        format.json { render json: @comment, status: :created, location: @comment }
+        redirect_to :controller => 'posts', :action => 'index'
       else
-        format.html { render action: "new" }
-        format.json { render json: @comment.errors, status: :unprocessable_entity }
+        flash[:notice]  = "Error!"
+        redirect_to :controller => 'posts', :action => 'index'
       end
-    end
   end
 
   # PUT /comments/1

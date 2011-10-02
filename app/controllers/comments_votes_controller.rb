@@ -25,10 +25,25 @@ class CommentsVotesController < ApplicationController
   # GET /comments_votes/new.json
   def new
     @comments_vote = CommentsVote.new
+    @comments_vote.comment_id = params[:comment_id]
+    @comments_vote.user_id = session[:current_user_id]
+    if Comment.find(params[:comment_id]).user_id == session[:current_user_id]
+      flash[:notice] = "The user cannot vote his own replies"
+      redirect_to :controller => 'posts', :action => 'index' and return
+    else
+      if CommentsVote.find_by_comment_id_and_user_id(params[:comment_id], session[:current_user_id])
+        flash[:notice] = "You have already voted"
+        redirect_to :controller => 'posts', :action => 'index' and return
+      else
 
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @comments_vote }
+        if @comments_vote.save
+          redirect_to :controller => 'posts', :action => 'index'  and return
+        else
+         flash[:notice] = "Error!"
+             redirect_to :controller => 'posts', :action => 'index' and return
+        end
+        redirect_to :controller => 'posts', :action => 'index'  and return
+      end
     end
   end
 
