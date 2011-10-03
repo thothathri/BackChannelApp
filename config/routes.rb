@@ -5,6 +5,14 @@ BackChannelApp5::Application.routes.draw do
 
   get "main/search"
 
+   match 'users/search_by_content' => 'users#search_by_content'
+
+   match 'users/user_not_found'=> 'users#user_not_found'
+
+  match 'users/content_not_found'=> 'users#content_not_found'
+
+  match 'users/admin_user' => 'users#admin_user'
+
   match 'users/login'=> 'users#login'
 
   match 'users/search'=> 'users#search'

@@ -30,11 +30,15 @@
   <div class="field">
     <%= f.label :phone %><br />
     <%= f.text_field :phone %>
+  <% if session[:current_user_id]!=nil %>
+  <% if User.find(session[:current_user_id]).role == 'admin' %>
   </div>
-  <div class="field">
+    <div class="field">
     <%= f.label :role %><br />
     <%= f.text_field :role %>
   </div>
+  <% end %>
+  <% end %>
   <div class="actions">
     <%= f.submit %>
   </div>

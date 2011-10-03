@@ -1,11 +1,8 @@
-<h1>User Details</h1><br />
-Username:  <%= @user.username %>
-<br />
-Name:  <%= @user.name %>
-<br />
-<h2>Posts By User</h2>
+<h2>Posts By Content</h2>
 <% @user_posts.each do |post| %>
-    <%= post.topic %>
+    <td>Topic : <%= post.topic %></td>
+    <td><b><%= User.find(post.user_id).username %></b></td>
+
     <% if post.user_id == session[:current_user_id] %>
     <td><%= link_to 'Edit', edit_post_path(post) %>
     <td><%= link_to 'Delete', post, confirm: 'Are you sure?', method: :delete %>

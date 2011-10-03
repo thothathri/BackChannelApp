@@ -19,18 +19,31 @@ def login
       redirect_to(:controller => 'main',:action => 'index', notice: 'Wrong User Name!') and return
     end
     session[:current_user_id] = @user.id
+    if User.find(session[:current_user_id]).role == 'admin'
+       redirect_to(:controller => 'users',:action => 'admin_user', :notice => session[:current_user_id] ) and return
+    end
     redirect_to(:controller => 'posts',:action => 'index', :notice => session[:current_user_id] ) and return
+end
+
+  def admin_user
+
   end
 
   # GET /users/1
   # GET /users/1.json
   def show
-    @user = User.find(params[:id])
-
+    @user = User.find_by_username(params[:search_by_user_query])
+    if @user == nil
+      redirect_to :controller => 'users', :action => 'user_not_found' and return
+    end
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @user }
     end
+  end
+
+  def user_not_found
+
   end
 
   # GET /users/new
@@ -68,15 +81,23 @@ def login
   def search
     @user = User.find_by_username(params[:search_by_user_query])
     if @user == nil
-       redirect_to(:controller => 'main',:action => 'index', notice: 'No such user exists' )
+          redirect_to(:controller => 'users',:action => 'user_not_found', notice: 'No such user exists' ) and return
     end
-    @user_posts = Post.find_all_by_user_id(@user.id)
+      @user_posts = Post.find_all_by_user_id(@user.id)
     respond_to do |format|
       format.html # search.html.erb
     end
   end
 
-  def find_posts
+  def search_by_content
+    @user_posts =Post.find(:all, :conditions => "topic LIKE '%#{params[:search_by_content_query]}%'")
+    if @user_posts.count == 0
+      redirect_to(:controller => 'users', :action => 'content_not_found', notice: 'No such content found!') and return
+    end
+  end
+
+
+  def content_not_found
 
   end
   # PUT /users/1

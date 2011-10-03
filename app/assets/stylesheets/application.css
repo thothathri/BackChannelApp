@@ -5,3 +5,46 @@
  *= require_self
  *= require_tree . 
 */
+
+.header{
+       background-color: #99CCFF;
+       color: #00008B;
+       font-size: 18pt;
+        font-family: Helvetica;
+       text-indent: 20px;
+        padding-top:15px;
+        height: 45px;
+}
+
+.search{
+    margin-right: 400px;
+    margin-top: 20px;
+    margin-left: 200px;
+    width: 400px;
+    height: 150px;
+    border: 1px solid #99CCFF;
+    border-radius: 20px;
+}
+
+.searchUser{
+    text-align: center;
+    color: #00008B;
+}
+
+.searchPost{
+     text-align: center;
+    color: #00008B;
+}
+
+.login{
+    position: absolute;
+    text-align: center;
+    margin-right: 600px;
+    margin-top: 20px;
+     margin-left: 800px;
+    width: 250px;
+    height: 150px;
+    color: #00008B;
+    border: 1px solid #99CCFF;
+    border-radius: 20px;
+}

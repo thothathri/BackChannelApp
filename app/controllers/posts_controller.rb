@@ -76,10 +76,7 @@ class PostsController < ApplicationController
   def destroy
     @post = Post.find(params[:id])
     @post.destroy
+    redirect_to(:controller => 'posts', :action => 'index') and return
 
-    respond_to do |format|
-      format.html { redirect_to posts_url }
-      format.json { head :ok }
-    end
   end
 end

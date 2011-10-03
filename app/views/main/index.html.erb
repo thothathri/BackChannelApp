@@ -1,8 +1,15 @@
-<h1>CSC 517 BackChannelApp</h1>
-<%= render 'login'%>
-
+<div class="login">
+  <br/>
+  <%= render 'login'%>
+<br/>
 New User? <%= link_to 'Register Here', :controller => 'users', :action => 'new' %>
+  </div>
+<div id="search" class="search">
 <%= render 'search'%>
+<%= render 'search_by_content'%>
+</div>
+
+
 
 
 
