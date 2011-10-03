@@ -1,48 +1,43 @@
 <h1>List of Posts</h1>
 
-<table>
-
 <% @posts.each do |post| %>
 
 
-    <tr>
-    <td><%= post.topic %></td>
-
-    <td><b><%= User.find_by_id(post.user_id).username %></b></td>
-    <td><%= link_to 'Show', post %></td>
-    <td><b><%= PostsVote.find_all_by_post_id(post.id).length %>Votes</b></td>
+    <div class="postBorder">
+    <b><%= User.find_by_id(post.user_id).username %></b>
+    <%= post.topic %>
+    <u><%= PostsVote.find_all_by_post_id(post.id).length %> Votes</u>
+    <%= link_to 'Show', post %>
     <% if session[:current_user_id]!=nil %>
     <% if post.user_id == session[:current_user_id] || User.find(session[:current_user_id]).role == 'admin' %>
-    <td><%= link_to 'Edit', edit_post_path(post) %></td>
-    <td><%= link_to 'Delete', post, confirm: 'Are you sure?', method: :delete %></td>
+    <%= link_to 'Edit', edit_post_path(post) %>
+    <%= link_to 'Delete', post, confirm: 'Are you sure?', method: :delete %>
     <% end %>
     <% end %>
     <% if session[:current_user_id]!=nil %>
-    <td><%= link_to 'Comment', new_comment_path(:post_id => post.id) %></td>
-    <td><%= link_to 'Vote Up', new_posts_vote_path(:post_id => post.id) %></td>
+    <%= link_to 'Comment', new_comment_path(:post_id => post.id) %>
+    <%= link_to 'Vote Up', new_posts_vote_path(:post_id => post.id) %>
     <% end %>
-  </tr>
-  <tr>
     <% Comment.find_all_by_post_id(post.id).each do |cmt| %>
-    <td></td><td><%= cmt.reply %>    </td>
-    <td><b><%= User.find(cmt.user_id).username %></b></td>
-    <td><b><%= CommentsVote.find_all_by_comment_id(cmt.id).length %>Votes</b></td>
+    <div class="commentBorder">
+    <b><%= User.find(cmt.user_id).username %></b>
+    <%= cmt.reply %>
+    <u><%= CommentsVote.find_all_by_comment_id(cmt.id).length %> Votes</u>
     <% if session[:current_user_id]!=nil %>
     <% if cmt.user_id == session[:current_user_id] || User.find(session[:current_user_id]).role == 'admin' %>
-    <td><%= link_to 'Edit', edit_comment_path(cmt) %></td>
-    <td><%= link_to 'Delete', cmt, confirm: 'Are you sure?', method: :delete %></td>
+    <%= link_to 'Edit', edit_comment_path(cmt) %>
+    <%= link_to 'Delete', cmt, confirm: 'Are you sure?', method: :delete %>
     <% end %>
     <% end %>
     <% if session[:current_user_id]!=nil %>
-    <td><%= link_to 'Vote Up', new_comments_vote_path(:user_id => cmt.user_id, :comment_id => cmt.id) %></td>
+    <%= link_to 'Vote Up', new_comments_vote_path(:user_id => cmt.user_id, :comment_id => cmt.id) %>
     <% end %>
-  </tr>
+    <br />
+    </div>
     <% end %>
-
+    <br />
+    </div>
 <% end %>
-</table>
-
-
 
 <br />
 

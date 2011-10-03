@@ -35,8 +35,10 @@ class PostsVotesController < ApplicationController
         flash[:notice] = "You have already voted"
         redirect_to :controller => 'posts', :action => 'index' and return
       else
-
         if @posts_vote.save
+          @post = Post.find(params[:post_id])
+          @post.count = @post.count+1
+          @post.save
           redirect_to :controller => 'posts', :action => 'index'  and return
         else
          flash[:notice] = "Error!"

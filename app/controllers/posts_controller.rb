@@ -2,7 +2,8 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all
+    @posts = Post.find(:all, :order => 'count desc, created_at desc')
+
 
     respond_to do |format|
       format.html # index.html.erb
@@ -43,6 +44,7 @@ class PostsController < ApplicationController
     @post = Post.new
     @post.topic = params[:post][:topic]
     @post.user_id = session[:current_user_id]
+    @post.count = 0
 
     respond_to do |format|
       if @post.save
