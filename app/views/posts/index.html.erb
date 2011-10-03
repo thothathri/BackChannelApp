@@ -1,17 +1,13 @@
 <h1>List of Posts</h1>
 
 <table>
-  <tr>
-    <th>Topic</th>
-    <th>User</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
 
 <% @posts.each do |post| %>
-  <tr>
+
+
+    <tr>
     <td><%= post.topic %></td>
+
     <td><b><%= User.find_by_id(post.user_id).username %></b></td>
     <td><%= link_to 'Show', post %></td>
     <td><b><%= PostsVote.find_all_by_post_id(post.id).length %>Votes</b></td>
@@ -42,6 +38,7 @@
     <% end %>
   </tr>
     <% end %>
+
 <% end %>
 </table>
 
