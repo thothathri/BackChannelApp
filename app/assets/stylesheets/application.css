@@ -48,3 +48,7 @@
     border: 1px solid #99CCFF;
     border-radius: 20px;
 }
+
+.logout_button{
+   text-align: right;
+}
