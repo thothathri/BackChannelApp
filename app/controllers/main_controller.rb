@@ -6,7 +6,9 @@ class MainController < ApplicationController
   def new
 
   end
+  def first_time_user
 
+  end
 
   def search
   end

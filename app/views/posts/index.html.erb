@@ -4,7 +4,7 @@
 
 
     <div class="postBorder">
-    <b><%= User.find_by_id(post.user_id).username %></b>
+    <b><%= (User.find_by_id(post.user_id)).username %></b>
     <%= post.topic %>
     <u><%= PostsVote.find_all_by_post_id(post.id).length %> Votes</u>
     <%= link_to 'Show', post %>

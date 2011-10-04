@@ -11,6 +11,13 @@ class UsersController < ApplicationController
   end
 
 def login
+    puts "hello"
+    puts "hello"
+    puts "hello"
+    puts "hello"
+    puts params[:username]
+    puts params[:password]
+
     @user = User.find_by_username(params[:username])
     if(@user==nil)
        redirect_to(:controller => 'main',:action => 'index') and return
@@ -19,6 +26,10 @@ def login
       redirect_to(:controller => 'main',:action => 'index', notice: 'Wrong User Name!') and return
     end
     session[:current_user_id] = @user.id
+    puts session[:current_user_id]
+    puts session[:current_user_id]
+    puts session[:current_user_id]
+    puts session[:current_user_id]
     if User.find(session[:current_user_id]).role == 'admin'
        redirect_to(:controller => 'users',:action => 'admin_user', :notice => session[:current_user_id] ) and return
     end
@@ -61,7 +72,13 @@ end
   def edit
     @user = User.find(params[:id])
   end
+  def log
 
+     respond_to do |format|
+      format.html # new.html.erb
+      format.json { render json: @user }
+    end
+  end
   # POST /users
   # POST /users.json
   def create
@@ -69,7 +86,7 @@ end
 
 
       if @user.save
-        redirect_to(:controller => 'posts', :action => 'index')
+        redirect_to(:controller => 'users', :action => 'log')
       else
         redirect_to(:controller => 'main', :action => 'index')
       end

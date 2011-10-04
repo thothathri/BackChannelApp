@@ -29,5 +29,6 @@ gem 'jquery-rails'
 
 group :test do
   # Pretty printed test output
+  gem 'test-unit'
   gem 'turn', :require => false
 end

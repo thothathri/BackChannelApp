@@ -7,6 +7,8 @@ BackChannelApp5::Application.routes.draw do
 
    match 'users/search_by_content' => 'users#search_by_content'
 
+  match 'users/log' => 'users#log'
+
    match 'users/user_not_found'=> 'users#user_not_found'
 
   match 'users/logout' => 'users#logout'
