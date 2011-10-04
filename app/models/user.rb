@@ -5,5 +5,9 @@ class User < ActiveRecord::Base
 	 validates :password, :presence => true,
 			  :length => { :minimum => 5}
    validates_uniqueness_of :username
-  has_many :posts
+   has_many :posts
+  def self.create_encrypted_password(password)
+    return Digest::SHA2.hexdigest(password)
+  end
+
 end

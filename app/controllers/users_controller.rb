@@ -11,25 +11,14 @@ class UsersController < ApplicationController
   end
 
 def login
-    puts "hello"
-    puts "hello"
-    puts "hello"
-    puts "hello"
-    puts params[:username]
-    puts params[:password]
-
     @user = User.find_by_username(params[:username])
     if(@user==nil)
        redirect_to(:controller => 'main',:action => 'index') and return
     end
-    if(@user.password!=params[:password])
+    if(@user.password!=User.create_encrypted_password(params[:password]))
       redirect_to(:controller => 'main',:action => 'index', notice: 'Wrong User Name!') and return
     end
     session[:current_user_id] = @user.id
-    puts session[:current_user_id]
-    puts session[:current_user_id]
-    puts session[:current_user_id]
-    puts session[:current_user_id]
     if User.find(session[:current_user_id]).role == 'admin'
        redirect_to(:controller => 'users',:action => 'admin_user', :notice => session[:current_user_id] ) and return
     end
@@ -83,8 +72,8 @@ end
   # POST /users.json
   def create
     @user = User.new(params[:user])
-
-
+    password = @user.password
+    @user.password= User.create_encrypted_password(password)
       if @user.save
         redirect_to(:controller => 'users', :action => 'log')
       else
@@ -118,16 +107,8 @@ end
   # PUT /users/1.json
   def update
     @user = User.find(params[:id])
-
-    respond_to do |format|
-      if @user.update_attributes(params[:user])
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
-        format.json { head :ok }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
-    end
+    @user.update_attributes(params[:user])
+    redirect_to :controller => 'users', :action => 'admin_user'
   end
 
   # DELETE /users/1
