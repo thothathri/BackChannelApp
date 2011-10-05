@@ -8,7 +8,21 @@
 </head>
 <body>
 <div class="header">CSC 517 BackChannelApp</div>
-<div class="logout_button"><%= link_to "logout", :controller => 'users', :action => 'logout'%></div>
+<% if session[:current_user_id] %>
+<div class="links_on_page">
+  <%= link_to 'Home', :controller => 'main', :action => 'index' %>
+  <%= link_to 'Posts', :controller => 'posts', :action => 'index' %>
+  <% if User.find(session[:current_user_id]).role == 'admin' %>
+  <%= link_to 'Profile', :controller => 'users', :action => 'admin_user' %>
+  <% end %>
+</div>
+<% end %>
+<% if session[:current_user_id]!=nil %>
+<div class="logged_in_user">Logged in as:<b><%= User.find(session[:current_user_id]).username%></b></div>
+<% end %>
+<% if session[:current_user_id]!=nil %>
+<div class="logout_button"><%= link_to "Logout", :controller => 'users', :action => 'logout'%></div>
+<% end %>
 <%= yield %>
 
 </body>

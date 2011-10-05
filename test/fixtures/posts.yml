@@ -1,9 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
 
 one:
-  topic: MyText
-  user: 
+  topic: Homework
+  user: shruthi
 
 two:
-  topic: MyText
-  user: 
+  topic: Exam pattern
+  user: sandhya

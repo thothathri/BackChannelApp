@@ -1,9 +1,11 @@
+<% if session[:current_user_id]==nil %>
 <div class="login">
   <br/>
   <%= render 'login'%>
 <br/>
 New User? <%= link_to 'Register Here', :controller => 'users', :action => 'new' %>
-  </div>
+</div>
+<% end %>
 <div id="search" class="search">
 <%= render 'search'%>
 <%= render 'search_by_content'%>

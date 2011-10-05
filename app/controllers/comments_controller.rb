@@ -14,9 +14,8 @@ class CommentsController < ApplicationController
   # GET /comments/1.json
   def show
     @comment = Comment.find(params[:id])
-
     respond_to do |format|
-      format.html # show.html.erb
+      format.html  # show.html.erb
       format.json { render json: @comment }
     end
   end

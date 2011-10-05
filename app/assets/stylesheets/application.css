@@ -16,6 +16,12 @@
         height: 45px;
 }
 
+.links_on_page{
+    font-size: 11pt;
+    text-align: center;
+    margin-left: 150px;
+}
+
 .search{
     margin-right: 400px;
     margin-top: 20px;
@@ -51,4 +57,17 @@
 
 .logout_button{
    text-align: right;
+   font-size: 11pt;
+}
+
+.logged_in_user{
+   position : absolute;
+   font-size: 11pt;
+   text-align: left;
+
+}
+.links_on_page{
+    position : absolute;
+    font-size: 11pt;
+    margin-left: 600px;
 }

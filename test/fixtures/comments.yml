@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
 
 one:
-  reply: MyText
-  post: 
-  user: 
+  reply: Same doubt
+  post: one
+  user: sandhya
 
 two:
-  reply: MyText
-  post: 
-  user: 
+  reply: I would like to know that too
+  post: two
+  user: shruthi

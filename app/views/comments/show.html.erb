@@ -6,15 +6,10 @@
 </p>
 
 <p>
-  <b>Post:</b>
-  <%= @comment.post %>
-</p>
-
-<p>
-  <b>User:</b>
-  <%= @comment.user %>
+  <b>Username:</b>
+  <%= User.find(@comment.user).username %>
 </p>
 
 
 <%= link_to 'Edit', edit_comment_path(@comment) %> |
-<%= link_to 'Back', comments_path %>
+<%= link_to 'Back', :controller => 'posts', :action => 'index' %>

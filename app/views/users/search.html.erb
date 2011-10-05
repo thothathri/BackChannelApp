@@ -11,4 +11,5 @@ Name:  <%= @user.name %>
     <td><%= link_to 'Delete', post, confirm: 'Are you sure?', method: :delete %>
     <% end %><br />
 <% end %>
+<%= link_to 'Back', :controller => 'main', :action => 'index' %>
 

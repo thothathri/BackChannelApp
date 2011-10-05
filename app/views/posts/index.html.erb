@@ -1,8 +1,7 @@
 <h1>List of Posts</h1>
 
 <% @posts.each do |post| %>
-
-
+    <% if (User.find_by_id(post.user_id))!=nil %>
     <div class="postBorder">
     <b><%= (User.find_by_id(post.user_id)).username %></b>
     <%= post.topic %>
@@ -22,7 +21,7 @@
     <div class="commentBorder">
     <b><%= User.find(cmt.user_id).username %></b>
     <%= cmt.reply %>
-    <u><%= CommentsVote.find_all_by_comment_id(cmt.id).length %> Votes</u>
+    <u><%= CommentsVote.find_all_by_comment_id(cmt.id).length %> Votes</u><br />
     <% if session[:current_user_id]!=nil %>
     <% if cmt.user_id == session[:current_user_id] || User.find(session[:current_user_id]).role == 'admin' %>
     <%= link_to 'Edit', edit_comment_path(cmt) %>
@@ -38,7 +37,18 @@
     <br />
     </div>
 <% end %>
+<% end %>
 
 <br />
 
-<%= link_to 'New Post', new_post_path %>
+<%= link_to 'New Post', new_post_path %> <br />
+<% if session[:current_user_id] %>
+<% if User.find(session[:current_user_id]).role == 'admin' %>
+<%= link_to 'Back', :controller => 'users', :action => 'admin_user'  %>
+<% else %>
+<%= link_to 'Back', :controller => 'main', :action => 'index'  %>
+<% end %>
+<% else %>
+<%= link_to 'Back', :controller => 'main', :action => 'index'  %>
+<% end %>
+

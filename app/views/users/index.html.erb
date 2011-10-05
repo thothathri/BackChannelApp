@@ -1,10 +1,10 @@
-<h1>Listing users</h1>
 <% if session[:current_user_id]!=nil %>
 <% if User.find(session[:current_user_id]).role == 'admin' %>
+<h1>Listing users</h1>
 <table>
   <tr>
     <th>Username</th>
-    <th>Password</th>
+    <th>Encrypted Password</th>
     <th>Name</th>
     <th>Email</th>
     <th>Phone</th>
@@ -31,5 +31,6 @@
 <br />
 
 <%= link_to 'New User', new_user_path %>
+<%= link_to 'Back', :controller => 'users', :action => 'admin_user' %>
 <% end %>
 <% end %>

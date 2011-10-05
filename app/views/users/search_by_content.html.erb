@@ -7,5 +7,6 @@
     <td><%= link_to 'Edit', edit_post_path(post) %>
     <td><%= link_to 'Delete', post, confirm: 'Are you sure?', method: :delete %>
     <% end %><br />
-<% end %>
+<% end %><br />
+<%= link_to 'Back', :controller => 'main', :action => 'index' %>
 

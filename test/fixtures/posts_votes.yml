@@ -1,9 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
 
 one:
-  post: 
-  user: 
+  post: one
+  user: sandy
 
 two:
-  post: 
-  user: 
+  post: one
+  user: sandhya

@@ -1,17 +1,25 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+shruthi:
+  username: ShruthiVR
+  password: abcdefg
+  name: Shruthi
+  email: svr@gmail.com
+  phone: 9945231234
+  role: user
 
-one:
-  username: MyString
-  password: MyString
-  name: MyString
-  email: MyString
-  phone: MyString
-  role: MyString
+sandhya:
+  username: Sandhya
+  password: seroirtjdkfl
+  name: SandhyaBS
+  email: sbs@gmail.com
+  phone: 123234455
+  role: user
 
-two:
-  username: MyString
-  password: MyString
-  name: MyString
-  email: MyString
-  phone: MyString
-  role: MyString
+sandy:
+  username: Sandy
+  password: seerserroirtjdkfl
+  name: BSandy
+  email: ss@gmail.com
+  phone: 123234455
+  role: user
+

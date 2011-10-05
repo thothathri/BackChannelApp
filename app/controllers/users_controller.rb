@@ -94,7 +94,7 @@ end
 
   def search_by_content
     @user_posts =Post.find(:all, :conditions => "topic LIKE '%#{params[:search_by_content_query]}%'")
-    if @user_posts.count == 0
+    if @user_posts ==nil
       redirect_to(:controller => 'users', :action => 'content_not_found', notice: 'No such content found!') and return
     end
   end
@@ -115,7 +115,7 @@ end
   # DELETE /users/1.json
   def destroy
     @user = User.find(params[:id])
-    @user.destroy
+    User.cascade_delete(@user)
 
     respond_to do |format|
       format.html { redirect_to users_url }
