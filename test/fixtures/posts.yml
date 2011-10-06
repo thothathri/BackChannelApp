@@ -1,10 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
-one:
-  id: 1
-  topic: Homework
-  user: shruthi
 
-two:
+post1:
+  id: 1
+  topic: Hello I am a post with test data
+  user_id: 1
+
+post2:
   id: 2
-  topic: Exam pattern
-  user: sandhya
+  topic: Hello
+  user_id: 2

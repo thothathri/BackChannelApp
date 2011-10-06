@@ -1,11 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
 
-one:
-  reply: Same doubt
-  post: one
-  user: sandhya
+comment1:
+  id: 1
+  reply: Hello
+  post_id: 1
+  user_id: 1
 
-two:
-  reply: I would like to know that too
-  post: two
-  user: shruthi
+comment2:
+  id: 2
+  reply: u der
+  post_id: 2
+  user_id: 2

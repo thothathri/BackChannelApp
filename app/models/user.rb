@@ -1,10 +1,11 @@
 require 'digest/sha2'
 
 class User < ActiveRecord::Base
-   validates :username, :presence => true
+   validates :username, :presence => true   #checking for presence of username, password, etc.
 	 validates :password, :presence => true,
 			  :length => { :minimum => 5}
    validates_uniqueness_of :username
+   validates_uniqueness_of :name
    has_many :posts
   def self.create_encrypted_password(password)
     return Digest::SHA2.hexdigest(password)

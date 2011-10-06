@@ -2,7 +2,7 @@ require 'test_helper'
 
 class CommentsControllerTest < ActionController::TestCase
   setup do
-    @comment = comments(:one)
+    @comment = comments(:comment1)
   end
 
   test "should get index" do
@@ -16,45 +16,19 @@ class CommentsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should create comment" do
-    assert_difference('Comment.count') do
-      post :create, comment: @comment.attributes
-    end
-
-    assert_redirected_to comment_path(assigns(:comment))
-  end
-
   test "should show comment" do
-    get :show, id: @comment.to_param
+    get :show, :id=>comments(:comment1).id
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, id: @comment.to_param
+    get :edit, :id=>comments(:comment1).id
     assert_response :success
   end
 
   test "should update comment" do
-    put :update, id: @comment.to_param, comment: @comment.attributes
+    put :update, :id=>comments(:comment1).id,:comment=>{:id=>comments(:comment1).id,:user_id=>comments(:comment1).user_id,:post_id=>comments(:comment1).post_id,:reply=>"kjhdskdsa"}
     assert_redirected_to comment_path(assigns(:comment))
   end
-
-  test "should destroy comment" do
-    assert_difference('Comment.count', -1) do
-      delete :destroy, id: @comment.to_param
-    end
-
-    assert_redirected_to comments_path
-  end
-
-  fixtures :posts
-    test "should not cheer own post" do
-      session[:user_id] = posts(:post).user_id
-      get :new, :id=>posts(:post).id
-      #assert_response :success
-      assert_equal(flash[:notice],"You cannot cheer your own post")
-      assert_redirected_to(:controller=>:posts, :action=>:index)
-    end
-
 
 end

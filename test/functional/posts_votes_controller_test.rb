@@ -1,8 +1,10 @@
 require 'test_helper'
 
 class PostsVotesControllerTest < ActionController::TestCase
-    fixtures:posts
-    fixtures:users
+  fixtures:posts_votes
+  setup do
+    @posts_vote = posts_votes(:pv1)
+  end
 
   test "should get index" do
     get :index
@@ -10,18 +12,12 @@ class PostsVotesControllerTest < ActionController::TestCase
     assert_not_nil assigns(:posts_votes)
   end
 
-  test "should get new" do
-    get :new
-    assert_response :success
+  test "User has already voted" do
+    session[:current_user_id]=posts_votes(:pv1).user_id
+    get :new ,:post_id=>posts_votes(:pv1).post_id
+    assert_redirected_to :controller => 'posts', :action => 'index'
   end
 
-  test "should create posts_vote" do
-    assert_difference('PostsVote.count') do
-      post :create, posts_vote: @posts_vote.attributes
-    end
-
-    assert_redirected_to posts_vote_path(assigns(:posts_vote))
-  end
 
   test "should show posts_vote" do
     get :show, id: @posts_vote.to_param
@@ -45,17 +41,4 @@ class PostsVotesControllerTest < ActionController::TestCase
 
     assert_redirected_to posts_votes_path
   end
-
-  #########
-
-test "User should not vote own post" do
-    session[:current_user_id]= posts(:one).user_id
-    get :new, :post_id=>posts(:one).id
-
-    assert_equal(flash[:notice],"The user cannot vote his own posts/replies")
-   # assert_redirected_to(:controller=>:posts, :action=>:index)
-  end
-
-
-
 end

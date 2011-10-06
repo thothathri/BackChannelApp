@@ -1,27 +1,30 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
-shruthi:
+
+ravi:
   id: 1
-  password: abcdefg
-  name: Shruthi
-  username: ShruthiVR
-  email: svr@gmail.com
-  phone: 9945231234
+  username: ravi
+  password: 18c43de4137739ba1abe4fbb837663c3ad71b4045fe09c51b209d2d47fb5fdea
+  name: ravi
+  email: raviteja.cric@gmail.com
+  phone: 6096133119
+  role: user
+
+srinivasan:
+  id: 2
+  username: srinivasan
+  password: eb2645b24cc4e3b085331a248f5b5b9fc41b2ca052a548e16afd6c2f051c9265
+  name: srinivasan
+  email: srinivasan@gmail.com
+  phone: 123456789
   role: admin
 
-sandhya:
-  id: 2
-  username: Sandhya
-  password: seroirtjdkfl
-  name: SandhyaBS
-  email: sbs@gmail.com
-  phone: 123234455
-  role: user
-
-sandy:
+shruthi:
   id: 3
-  username: Sandy
-  password: seerserroirtjdkfl
-  name: BSandy
-  email: ss@gmail.com
-  phone: 123234455
-  role: user
+  username: shruthi
+  password: acfc2ee2006e2c5919627b308fad4da6f28185bb00d1fafaa0dcaf8986d3c5d4
+  name: shruthi
+  email: shruthi@gmail.com
+  phone: 123456789
+  role: admin
+
+
