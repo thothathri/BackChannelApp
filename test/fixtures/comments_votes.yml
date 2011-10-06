@@ -1,9 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
 
 one:
-  post: 
-  comment: 
+  post: two
+  comment: one
 
 two:
-  post: 
-  comment: 
+  post: one
+  comment: two

@@ -1,13 +1,15 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
 shruthi:
-  username: ShruthiVR
+  id: 1
   password: abcdefg
   name: Shruthi
+  username: ShruthiVR
   email: svr@gmail.com
   phone: 9945231234
-  role: user
+  role: admin
 
 sandhya:
+  id: 2
   username: Sandhya
   password: seroirtjdkfl
   name: SandhyaBS
@@ -16,10 +18,10 @@ sandhya:
   role: user
 
 sandy:
+  id: 3
   username: Sandy
   password: seerserroirtjdkfl
   name: BSandy
   email: ss@gmail.com
   phone: 123234455
   role: user
-

@@ -1,12 +1,13 @@
 <h2>Posts By Content</h2>
 <% @user_posts.each do |post| %>
-    <td>Topic : <%= post.topic %></td>
-    <td><b><%= User.find(post.user_id).username %></b></td>
-
+    <div class="postBorder">
+    <b><%= User.find(post.user_id).username %></b>
+    <%= post.topic %>
     <% if post.user_id == session[:current_user_id] %>
     <td><%= link_to 'Edit', edit_post_path(post) %>
     <td><%= link_to 'Delete', post, confirm: 'Are you sure?', method: :delete %>
     <% end %><br />
+    </div>
 <% end %><br />
 <%= link_to 'Back', :controller => 'main', :action => 'index' %>
 

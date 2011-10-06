@@ -1,5 +1,21 @@
 <h1>New user Registration</h1>
 
-<%= render 'form' %>
+<form name="New_User_Form" action="/users/create" method="post" >
+<table>
+<tr><td>Username:</td><td> <input type="text" name="username" /></td><tr />
+<tr><td>Password:</td><td> <input type="password" name="password" /></td><tr />
+<tr><td>Name:</td><td> <input type="text" name="name" /></td><tr />
+<tr><td>Email:</td><td> <input type="text" name="email" /></td><tr />
+<tr><td>Phone:</td><td> <input type="text" name="phone" /></td><tr />
+<% if session[:current_user_id] %>
+  <% if User.find(session[:current_user_id]).role == 'admin' %>
+     <tr><td>Role:</td><td> <input type="text" name="role" /></td><tr />
+  <% else %>
+     <input type="hidden" name="role" value="">
+  <% end %>
+<% end %>
+</table>
+<input type="submit" value="Submit" />
+</form>
 
 <%= link_to 'Back', :controller => 'main', :action => 'index' %>

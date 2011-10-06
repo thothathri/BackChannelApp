@@ -1,11 +1,11 @@
 require 'test_helper'
 
 class PostsControllerTest < ActionController::TestCase
-  setup do
-    @post = posts(:one)
-  end
+      fixtures:users
+      fixtures:posts
 
   test "should get index" do
+
     get :index
     assert_response :success
     assert_not_nil assigns(:posts)
@@ -46,4 +46,15 @@ class PostsControllerTest < ActionController::TestCase
 
     assert_redirected_to posts_path
   end
+
+  #####ourtests####
+  test "should create new post" do
+    assert_difference('Post.count') do
+     session[:current_user_id]=100
+      post :create, :post=> {:topic=>"Examination result",:user_id=>100 }
+    end
+
+    #assert_redirected_to post_path(assigns(:post))
+  end
+
 end

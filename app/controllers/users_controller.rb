@@ -13,16 +13,20 @@ class UsersController < ApplicationController
 def login
     @user = User.find_by_username(params[:username])
     if(@user==nil)
+       flash[:notice] = 'No such Username Found!'
        redirect_to(:controller => 'main',:action => 'index') and return
     end
     if(@user.password!=User.create_encrypted_password(params[:password]))
-      redirect_to(:controller => 'main',:action => 'index', notice: 'Wrong User Name!') and return
+      flash[:notice] = 'Incorrect Password For User!!'
+      redirect_to(:controller => 'main',:action => 'index') and return
     end
     session[:current_user_id] = @user.id
     if User.find(session[:current_user_id]).role == 'admin'
-       redirect_to(:controller => 'users',:action => 'admin_user', :notice => session[:current_user_id] ) and return
+       flash[:notice] = ''
+       redirect_to(:controller => 'users',:action => 'admin_user' ) and return
     end
-    redirect_to(:controller => 'posts',:action => 'index', :notice => session[:current_user_id] ) and return
+    flash[:notice] = ''
+    redirect_to(:controller => 'posts',:action => 'index' ) and return
 end
 
   def admin_user
@@ -71,8 +75,13 @@ end
   # POST /users
   # POST /users.json
   def create
-    @user = User.new(params[:user])
-    password = @user.password
+    @user = User.new
+    @user.username = params[:username]
+    @user.name = params[:name]
+    @user.email = params[:email]
+    @user.phone = params[:phone]
+    @user.role = params[:role]
+    password = params[:password]
     @user.password= User.create_encrypted_password(password)
       if @user.save
         redirect_to(:controller => 'users', :action => 'log')

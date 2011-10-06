@@ -3,13 +3,15 @@ Username:  <%= @user.username %>
 <br />
 Name:  <%= @user.name %>
 <br />
-<h2>Posts By User</h2>
+<h2>Posts By User: <%= @user.username %></h2>
 <% @user_posts.each do |post| %>
+    <div class="postBorder">
     <%= post.topic %>
     <% if post.user_id == session[:current_user_id] %>
     <td><%= link_to 'Edit', edit_post_path(post) %>
     <td><%= link_to 'Delete', post, confirm: 'Are you sure?', method: :delete %>
     <% end %><br />
+    </div>
 <% end %>
 <%= link_to 'Back', :controller => 'main', :action => 'index' %>
 

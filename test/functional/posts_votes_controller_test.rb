@@ -1,9 +1,8 @@
 require 'test_helper'
 
 class PostsVotesControllerTest < ActionController::TestCase
-  setup do
-    @posts_vote = posts_votes(:one)
-  end
+    fixtures:posts
+    fixtures:users
 
   test "should get index" do
     get :index
@@ -46,4 +45,17 @@ class PostsVotesControllerTest < ActionController::TestCase
 
     assert_redirected_to posts_votes_path
   end
+
+  #########
+
+test "User should not vote own post" do
+    session[:current_user_id]= posts(:one).user_id
+    get :new, :post_id=>posts(:one).id
+
+    assert_equal(flash[:notice],"The user cannot vote his own posts/replies")
+   # assert_redirected_to(:controller=>:posts, :action=>:index)
+  end
+
+
+
 end

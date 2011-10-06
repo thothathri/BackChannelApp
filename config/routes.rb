@@ -21,6 +21,8 @@ BackChannelApp5::Application.routes.draw do
 
   match 'users/search'=> 'users#search'
 
+  match 'users/create' => 'users#create'
+
   resources :comments_votes
 
   resources :posts_votes

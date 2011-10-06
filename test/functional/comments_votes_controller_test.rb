@@ -1,9 +1,10 @@
 require 'test_helper'
 
 class CommentsVotesControllerTest < ActionController::TestCase
-  setup do
-    @comments_vote = comments_votes(:one)
-  end
+  fixtures:users
+  fixtures:posts
+  fixtures:comments
+  fixtures:comments_votes
 
   test "should get index" do
     get :index
@@ -45,5 +46,21 @@ class CommentsVotesControllerTest < ActionController::TestCase
     end
 
     assert_redirected_to comments_votes_path
+  end
+
+  test "User should not vote own comment " do
+    session[:current_user_id]= comments(:one).user_id
+    get :new, :comment_id=>comments(:one).id
+
+    assert_equal(flash[:notice],"The user cannot vote his own replies")
+   # assert_redirected_to(:controller=>:posts, :action=>:index)
+  end
+
+   #test "User should not vote more than once on a comment " do
+    session[:current_user_id]= comments_votes(:one).post_id
+    get :new, :comment_id=>comments_votes(:one).comment_id
+
+    assert_equal(flash[:notice],"You have already voted")
+   # assert_redirected_to(:controller=>:posts, :action=>:index)
   end
 end

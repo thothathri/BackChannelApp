@@ -1,15 +1,68 @@
 require 'test_helper'
-require 'test/unit'
+
 
 class UserTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
-test "first test case" do
-  assert true
+fixtures:users
+ test "User is not valid without a unique UserName" do
+  user = User.new(:username => users(:shruthi).username,
+  :password => "yyyyyyy",
+  :name => "abcd",
+  :email => "abcds@gmail.com",
+  :phone=>123-456-7891,
+  :role=>"User")
+ assert !user.save
+
+ end
+
+  test "User is not valid without a UserName" do
+  user = User.new(:username =>"",
+  :password => "yyyyyyy",
+  :name => "abcd",
+  :email => "abcds@gmail.com",
+  :phone=>123-456-7891,
+  :role=>"User")
+ assert user.invalid?
+  end
+
+test "User is not valid without a Password" do
+  user = User.new(:username => "userDad",
+  :password => "",
+  :name => "abcd",
+  :email => "abcds@gmail.com",
+  :phone=>123-456-7891,
+  :role=>"User")
+ assert user.invalid?
+
 end
-test "user should not be null" do
-  user = User.new
-  assert_false user.valid?
+
+ test "User's Password length should be a minimum of 5 characters" do
+  user = User.new(:username => "userDad",
+  :password => "",
+  :name => "abcd",
+  :email => "abcds@gmail.com",
+  :phone=>123-456-7891,
+  :role=>"User")
+ assert user.invalid?
+ end
+
+test "User is not valid without both Username & Password" do
+  user = User.new(:username => "userDad",
+  :password => "",
+  :name => "",
+  :email => "abcds@gmail.com",
+  :phone=>123-456-7891,
+  :role=>"User")
+ assert user.invalid?
 end
+
+  test "Password should be encrypted and saved into the DB " do
+  user = User.new(:username =>"XYZ",
+  :password => "yyyyyyy",
+  :name => "abcd",
+  :email => "abcds@gmail.com",
+  :phone=>123-456-7891,
+  :role=>"User")
+ assert user.save
+
+ end
 end
