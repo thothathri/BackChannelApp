@@ -830,7 +830,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-9" y="-9" width="1298" height="770" extended-state="6" />
+    <frame x="-9" y="-9" width="1298" height="770" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19008936" sideWeight="0.6597444" order="3" side_tool="false" content_ui="tabs" />
