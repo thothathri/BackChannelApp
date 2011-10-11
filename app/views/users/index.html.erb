@@ -22,8 +22,10 @@
     <td><%= user.email %></td>
     <td><%= user.phone %></td>
     <td><%= user.role %></td>
+    <% if user.role!='admin' %>
     <td><%= link_to 'Edit', edit_user_path(user) %></td>
     <td><%= link_to 'Destroy', user, confirm: 'Are you sure?', method: :delete %></td>
+    <% end %>
   </tr>
 <% end %>
 </table>
