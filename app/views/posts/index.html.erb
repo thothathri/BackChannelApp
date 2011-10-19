@@ -1,5 +1,6 @@
 <h1>List of Posts</h1>
-
+<p style="color:red"><%= flash[:notice]  %>
+<p style="color:black">
 <% @posts.each do |post| %>
     <% if (User.find_by_id(post.user_id))!=nil %>
     <div class="postBorder">

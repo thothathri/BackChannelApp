@@ -28,11 +28,11 @@ class PostsVotesController < ApplicationController
     @posts_vote.post_id = params[:post_id]
     @posts_vote.user_id = session[:current_user_id]
     if Post.find(params[:post_id]).user_id == session[:current_user_id]
-      flash[:notice] = "The user cannot vote his own posts/replies"
+      flash[:notice] = "You cannot vote his own posts/replies!!"
       redirect_to :controller => 'posts', :action => 'index' and return
     else
       if PostsVote.find_by_post_id_and_user_id(params[:post_id], session[:current_user_id])
-        flash[:notice] = "You have already voted"
+        flash[:notice] = "You have already voted before!!"
         redirect_to :controller => 'posts', :action => 'index' and return
       else
         if @posts_vote.save
