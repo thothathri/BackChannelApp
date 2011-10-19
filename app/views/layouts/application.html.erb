@@ -14,6 +14,7 @@
   <%= link_to 'Posts', :controller => 'posts', :action => 'index' %>
   <% if User.find(session[:current_user_id]).role == 'admin' %>
   <%= link_to 'Profile', :controller => 'users', :action => 'admin_user' %>
+  <%= link_to 'User Stats', :controller => 'users', :action => 'users_details' %>
   <% end %>
 </div>
 <% end %>

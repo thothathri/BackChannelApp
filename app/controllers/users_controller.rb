@@ -108,6 +108,38 @@ end
     end
   end
 
+def users_details
+    @users = User.find(:all)
+    @count = 0
+    @usersarray = []
+    @votesarray = []
+    @postsarray = []
+    @commentsarray = []
+@users.each do |user|
+    @count = 0
+    @usersarray.push(user.username)
+  if Post.find_all_by_user_id(user.id).size != 0
+    @post = Post.find_all_by_user_id(user.id)
+    @post.each do |post|
+      if PostsVote.find_all_by_post_id(post.id).size!=0
+        @count+=PostsVote.find_all_by_post_id(post.id).size
+      end
+    end
+    @votesarray.push(@count)
+    @postsarray.push(Post.find_all_by_user_id(user.id).size)
+  else
+    @votesarray.push(0)
+    @postsarray.push(0)
+  end
+  if Comment.find_all_by_user_id(user.id)!=nil
+    @commentsarray.push(Comment.find_all_by_user_id(user.id).size)
+  else
+    @commentsarray.push(0)
+  end
+end
+  @length = @usersarray.size
+end
+
 
   def content_not_found
 
